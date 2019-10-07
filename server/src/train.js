@@ -1,6 +1,17 @@
 'use strict';
-var TrainData = require("./data.js")
+const TrainData = require("./data.js");
+const tf = require('@tensorflow/tfjs-node');
 
-var trainData = new TrainData();
-trainData.addPath();
-trainData.load();
+
+
+module.exports = class Iris {
+    constructor() {
+        this.trainData = new TrainData();
+        // trainData.addImage("./Firefox_wallpaper.png");
+    }
+
+    async load () {
+        this.model = await this.trainData.loadModelUrl("https://storage.googleapis.com/tfjs-models/tfjs/iris_v1/model.json");
+    }
+
+}
